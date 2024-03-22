@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Define Action -->
+<record id="action_library_member_form" model="ir.actions.act_window">
+<field name="name">Library Members</field>
+<field name="res_model">library.member</field>
+<field name="view_mode">form,tree</field>
+<!-- Add other attributes as needed -->
+</record>
+
+
+<!-- Define Menu Item -->
+<menuitem name="Library Members" id="menu_library_members" parent="library_base_menu"/>
+
+<!-- Link Action to Menu Item -->
+<menuitem id="menu_library_members_action" name="Library Members" parent="library_base_menu" action="action_library_member_form"/>
+</odoo>

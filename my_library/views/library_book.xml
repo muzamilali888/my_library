@@ -1,0 +1,85 @@
+<odoo>
+    <!-- Update the custom form view -->
+    <record id="library_book_view_form" model="ir.ui.view">
+        <field name="name">Library Book Form</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="author_ids" widget="many2many_tags"/>
+                            <field name="state"/>
+                            <field name="pages"/>
+                            <field name="notes"/>
+                            <field name="publisher_id"/>
+                            <field name="publisher_city"/>
+                            <field name="ref_doc_id"/>
+                            <!-- Add the new computed field -->
+                            <field name="age_days"/>
+                        </group>
+                        <group>
+                            <field name="short_name"/>
+                            <field name="date_release"/>
+                            <field name="date_updated"/>
+                            <field name="cover" widget="image" class="oe_avatar"/>
+                            <field name="reader_rating"/>
+                            <field name="currency_id"/>
+                            <field name="retail_price"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Update the custom tree (list) view -->
+    <record id="library_book_view_tree" model="ir.ui.view">
+        <field name="name">Library Book List</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date_release"/>
+                <field name="publisher_city"/>
+                <field name="ref_doc_id"/>
+                <!-- Add the new computed field -->
+                <field name="age_days"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Update custom Search options -->
+    <record id="library_book_view_search" model="ir.ui.view">
+        <field name="name">Library Book Search</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="author_ids"/>
+                <filter string="No Authors" name="without_author" domain="[('author_ids','=',False)]"/>
+                <field name="publisher_city"/>
+                <field name="ref_doc_id"/>
+                <!-- Add the new computed field -->
+                <field name="age_days"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Add the action that opens the views -->
+    <record id='library_book_action' model='ir.actions.act_window'>
+        <field name="name">Library Books</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Add the menu items -->
+    <menuitem name="My Library" id="library_base_menu"/>
+    <menuitem name="Books" id="library_book_menu" parent="library_base_menu" action="library_book_action"/>
+
+
+</odoo>
